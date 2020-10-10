@@ -98,6 +98,8 @@ public class PlayerWalk : MonoBehaviour
             else
                 ClampVelocity(velMax);
         }
+        if(Input.GetAxis("Vertical") > 0)
+            rb.AddForce(Vector2.up * dashSpeed / 5, ForceMode2D.Impulse);
         yield return new WaitForSeconds(timeDashing);
         velMax = tempVel;
         acel = tempAcel;
