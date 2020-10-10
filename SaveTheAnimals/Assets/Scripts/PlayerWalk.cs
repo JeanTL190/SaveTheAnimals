@@ -5,21 +5,23 @@ using UnityEngine;
 public class PlayerWalk : MonoBehaviour
 {
     [SerializeField] private float velMax = 1f;
+    [SerializeField] private float acel = 1f;
+    [SerializeField] private float desac = 1f;
     [SerializeField] private string ipt;
     [SerializeField] private bool right = true;
     private Rigidbody2D rb;
-    private float vel;
+    private float velAtual;
     private Animator anim;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        vel = velMax;
+        velAtual = velMax;
     }
     private void Update()
     {
-        anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+        //anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
     }
     private void FixedUpdate()
     {
@@ -27,17 +29,44 @@ public class PlayerWalk : MonoBehaviour
         if (aux > 0)
         {
             transform.rotation = new Quaternion(0, 0, 0, 0);
-            rb.velocity = new Vector2(vel, rb.velocity.y);
+            velAtual += (aux * acel);
+            ClampVelocity(velAtual);
             right = true;
         }
         else if (aux < 0)
         {
             transform.rotation = new Quaternion(0, 180, 0, 0);
-            rb.velocity = new Vector2(-vel, rb.velocity.y);
+            velAtual += (aux * acel);
+            ClampVelocity(velAtual);
             right = false;
         }
         else
-            rb.velocity = new Vector2(0, rb.velocity.y);
+        {
+            Stoped();
+            ClampVelocity(velAtual);
+        }
+    }
+    private void ClampVelocity(float vel)
+    {
+        float x = Mathf.Clamp(vel, -velMax, velMax);
+        rb.velocity = new Vector2(x, rb.velocity.y);
+        velAtual = x;
+    }
+    private void Stoped()
+    {
+        if (velAtual != 0)
+        {
+            if (velAtual > 0)
+            {
+                velAtual -= desac;
+                velAtual = Mathf.Clamp(velAtual, 0, velMax);
+            }
+            else if (velAtual < 0)
+            {
+                velAtual += desac;
+                velAtual = Mathf.Clamp(velAtual, -velMax, 0);
+            }
+        }
     }
     public bool GetRight()
     {
@@ -45,11 +74,11 @@ public class PlayerWalk : MonoBehaviour
     }
     public void ResetVel()
     {
-        vel = velMax;
+        velAtual = velMax;
     }
     public void ZeroVel()
     {
-        vel = 0;
+        velAtual = 0;
     }
     public void SetVelMax(float v)
     {
