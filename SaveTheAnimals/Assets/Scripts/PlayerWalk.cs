@@ -91,6 +91,13 @@ public class PlayerWalk : MonoBehaviour
         float tempAcel = acel;
         velMax = dashSpeed;
         acel = dashSpeed;
+        if(velAtual == 0)
+        {
+            if(right)
+                ClampVelocity(velMax);
+            else
+                ClampVelocity(velMax);
+        }
         yield return new WaitForSeconds(timeDashing);
         velMax = tempVel;
         acel = tempAcel;
