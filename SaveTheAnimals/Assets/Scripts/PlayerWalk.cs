@@ -85,4 +85,15 @@ public class PlayerWalk : MonoBehaviour
         velMax = v;
     }
 
+    public IEnumerator Dash(float dashSpeed, float timeDashing)
+    {
+        float tempVel = velMax;
+        float tempAcel = acel;
+        velMax = dashSpeed;
+        acel = dashSpeed;
+        yield return new WaitForSeconds(timeDashing);
+        velMax = tempVel;
+        acel = tempAcel;
+    }
+
 }
