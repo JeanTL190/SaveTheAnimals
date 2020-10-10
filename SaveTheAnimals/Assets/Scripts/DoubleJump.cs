@@ -8,7 +8,6 @@ public class DoubleJump : MonoBehaviour
     private bool canDoubleJump = false;
     private PlayerJump pj;
     private Rigidbody2D rb;
-    private Animator anim;
     private int jumps = 0;
 
     private void Awake()
