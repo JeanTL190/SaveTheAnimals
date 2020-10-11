@@ -9,6 +9,7 @@ public class DoubleJump : MonoBehaviour
     private PlayerJump pj;
     private Rigidbody2D rb;
     private int jumps = 0;
+    [SerializeField] private Animator jump;
 
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class DoubleJump : MonoBehaviour
         {
             jumps++;
             rb.velocity = Vector2.zero;
+            jump.SetTrigger("DoubleJump");
             rb.AddForce(Vector2.up * pj.GetJumpForce(), ForceMode2D.Impulse);
             if(jumps==jumpExtra)
             {

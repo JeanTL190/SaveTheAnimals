@@ -8,6 +8,8 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private string GroundCheckName;
     private Rigidbody2D rb;
     private Animator anim;
+    [SerializeField] private Animator jump;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -29,6 +31,7 @@ public class PlayerJump : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
+            jump.SetTrigger("NormalJump");
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
