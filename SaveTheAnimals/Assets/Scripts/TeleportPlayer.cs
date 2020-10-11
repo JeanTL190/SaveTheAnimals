@@ -14,6 +14,7 @@ public class TeleportPlayer : MonoBehaviour
 
     IEnumerator Teleport(Transform checkpoint)
     {
+        CameraShake.Instance.ShakeCamera(5f, 0.1f);
         fade.TriggerFade();
         yield return new WaitForSeconds(timeToFade);
         transform.position = checkpoint.position;
