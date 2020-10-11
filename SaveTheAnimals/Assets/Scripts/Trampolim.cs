@@ -16,8 +16,4 @@ public class Trampolim : MonoBehaviour
             StartCoroutine(collision.gameObject.GetComponent<PlayerWalk>().Trampolim(timeDashing,forca,transform.up));
         }
     }
-    private void Start()
-    {
-        Debug.Log(transform.rotation.eulerAngles.z);
-    }
 }

@@ -11,15 +11,15 @@ public class PlayerJump : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Pular();
-        //anim.SetFloat("SpeedUp", rb.velocity.y);
-       //anim.SetBool("Ground", IsGrounded());
+        anim.SetFloat("SpeedUp", rb.velocity.y);
+        anim.SetBool("Ground", IsGrounded());
     }
     public bool IsGrounded()
     {

@@ -22,7 +22,13 @@ public class PlayerWalk : MonoBehaviour
     }
     private void Update()
     {
-        //anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+        if(!das)
+            anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+        else
+        {
+            anim.SetFloat("Speed", Mathf.Abs(0));
+        }
+        anim.SetBool("Dash", das);
     }
     private void FixedUpdate()
     {
@@ -92,51 +98,41 @@ public class PlayerWalk : MonoBehaviour
     {
         return velMax;
     }
-    public IEnumerator Dash(float dashSpeedHorizontal, float timeDashing, float dashSpeedVertical)
+    public IEnumerator Dash(float timeDashing, float forca)
     {
         das = true;
-        float tempVel = velMax;
-        float tempAcel = acel;
+        rb.gravityScale = 1;
+        rb.velocity = new Vector2(rb.velocity.x, 0);
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
-        velMax = dashSpeedHorizontal;
-        acel = dashSpeedHorizontal;
-        rb.velocity = Vector2.zero;
-        if(vertical !=0 && horizontal != 0)
+        if(vertical!=0 && horizontal != 0)
         {
-            if (right)
-                ClampVelocity(velMax);
-            else
-                ClampVelocity(-velMax);
-            if(vertical>0)
-                rb.AddForce(Vector2.up * dashSpeedVertical, ForceMode2D.Impulse);
-            else
-                rb.AddForce(Vector2.down * dashSpeedVertical, ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(horizontal, vertical).normalized * forca, ForceMode2D.Impulse);
         }
         else if (vertical != 0)
         {
-            if (vertical > 0)
-                rb.AddForce(Vector2.up * dashSpeedVertical, ForceMode2D.Impulse);
-            else
-                rb.AddForce(Vector2.down * dashSpeedVertical, ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(0, vertical).normalized * forca, ForceMode2D.Impulse);
         }
         else
         {
             if(right)
-                ClampVelocity(velMax);
+                rb.AddForce(Vector2.right * forca, ForceMode2D.Impulse);
             else
-                ClampVelocity(-velMax);
+                rb.AddForce(Vector2.left * forca, ForceMode2D.Impulse);
         }
         yield return new WaitForSeconds(timeDashing);
-        velMax = tempVel;
-        acel = tempAcel;
         das = false;
+        rb.gravityScale = 3;
     }
     public IEnumerator Trampolim(float timeDashing, float forca, Vector3 v)
     {
         das = true;
+        rb.gravityScale = 1;
+        rb.velocity = Vector3.zero;
         rb.AddForce(v * forca, ForceMode2D.Impulse);
         yield return new WaitForSeconds(timeDashing);
         das = false;
+        rb.gravityScale = 3;
+
     }
 }
