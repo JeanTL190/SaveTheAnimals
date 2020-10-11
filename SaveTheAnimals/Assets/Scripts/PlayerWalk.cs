@@ -126,5 +126,17 @@ public class PlayerWalk : MonoBehaviour
         velMax = tempVel;
         acel = tempAcel;
     }
-
+    public IEnumerator Trampolim(float dashSpeedHorizontal, float timeDashing, float dashSpeedVertical)
+    {
+        float tempVel = velMax;
+        float tempAcel = acel;
+        velMax = dashSpeedHorizontal;
+        acel = dashSpeedHorizontal;
+        rb.velocity = Vector2.zero;
+        ClampVelocity(velMax);
+        rb.AddForce(Vector2.up * dashSpeedVertical, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(timeDashing);
+        velMax = tempVel;
+        acel = tempAcel;
+    }
 }
