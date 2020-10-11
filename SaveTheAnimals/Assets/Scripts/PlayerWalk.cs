@@ -14,6 +14,7 @@ public class PlayerWalk : MonoBehaviour
     private float velAtual;
     private Animator anim;
     private TrailRenderer tr;
+    private ParticleSystem dust;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class PlayerWalk : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         velAtual = velMax;
         tr = GetComponent<TrailRenderer>();
+        dust = GetComponentInChildren<ParticleSystem>();
     }
     private void Update()
     {
@@ -134,6 +136,7 @@ public class PlayerWalk : MonoBehaviour
         das = true;
         rb.gravityScale = 1;
         rb.velocity = Vector3.zero;
+        CreateDust();
         CameraShake.Instance.ShakeCamera(5f, 0.4f);
         rb.AddForce(v * forca, ForceMode2D.Impulse);
         yield return new WaitForSeconds(timeDashing);
@@ -141,4 +144,10 @@ public class PlayerWalk : MonoBehaviour
         rb.gravityScale = 3;
 
     }
+
+    private void CreateDust()
+    {
+        dust.Play();
+    }
+
 }
