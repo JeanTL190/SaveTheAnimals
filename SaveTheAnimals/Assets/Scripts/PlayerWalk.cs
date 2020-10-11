@@ -115,7 +115,7 @@ public class PlayerWalk : MonoBehaviour
             else
                 rb.AddForce(Vector2.down * dashSpeedVertical, ForceMode2D.Impulse);
         }
-        else if (velAtual == 0)
+        else
         {
             if(right)
                 ClampVelocity(velMax);
