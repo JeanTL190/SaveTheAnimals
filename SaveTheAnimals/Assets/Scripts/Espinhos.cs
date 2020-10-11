@@ -10,6 +10,7 @@ public class Espinhos : MonoBehaviour
     {   
         if( (((1 << collision.gameObject.layer) & platformLayerMask) != 0))
         {
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 5, ForceMode2D.Impulse);
             collision.gameObject.GetComponent<TeleportPlayer>().TeleportarPlayer(checkpoint);
         }
     }
