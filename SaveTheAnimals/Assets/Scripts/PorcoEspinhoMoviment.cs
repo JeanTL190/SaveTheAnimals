@@ -17,12 +17,12 @@ public class PorcoEspinhoMoviment : MonoBehaviour
         tToGo = posiDireita;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         //anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
         if (tToGo == posiDireita)
         {
-            if (transform.position.x > tToGo.position.x)
+            if (transform.position.x >= tToGo.position.x)
             {
                 tToGo = posiEsquerda;
                 transform.rotation = new Quaternion(0, 180, 0, 0);
@@ -31,7 +31,7 @@ public class PorcoEspinhoMoviment : MonoBehaviour
         }
         else
         {
-            if (transform.position.x < tToGo.position.x)
+            if (transform.position.x <= tToGo.position.x)
             {
                 tToGo = posiDireita;
                 transform.rotation = new Quaternion(0, 0, 0, 0);

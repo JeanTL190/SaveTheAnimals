@@ -9,6 +9,7 @@ public class PlayerWalk : MonoBehaviour
     [SerializeField] private float desac = 1f;
     [SerializeField] private string ipt;
     [SerializeField] private bool right = true;
+    private bool das = false;
     private Rigidbody2D rb;
     private float velAtual;
     private Animator anim;
@@ -26,25 +27,28 @@ public class PlayerWalk : MonoBehaviour
     private void FixedUpdate()
     {
         float aux = Input.GetAxis(ipt);
-        if (aux > 0)
+        if (!das)
         {
-            transform.rotation = new Quaternion(0, 0, 0, 0);
-            velAtual += (aux * acel);
-            ClampVelocity(velAtual);
-            right = true;
-        }
-        else if (aux < 0)
-        {
-            transform.rotation = new Quaternion(0, 180, 0, 0);
-            velAtual += (aux * acel);
-            ClampVelocity(velAtual);
-            right = false;
-        }
-        else
-        {
-            Stoped();
-            ClampVelocity(velAtual);
-        }
+            if (aux > 0)
+            {
+                transform.rotation = new Quaternion(0, 0, 0, 0);
+                velAtual += (aux * acel);
+                ClampVelocity(velAtual);
+                right = true;
+            }
+            else if (aux < 0)
+            {
+                transform.rotation = new Quaternion(0, 180, 0, 0);
+                velAtual += (aux * acel);
+                ClampVelocity(velAtual);
+                right = false;
+            }
+            else
+            {
+                Stoped();
+                ClampVelocity(velAtual);
+            }
+        }  
     }
     private void ClampVelocity(float vel)
     {
@@ -90,6 +94,7 @@ public class PlayerWalk : MonoBehaviour
     }
     public IEnumerator Dash(float dashSpeedHorizontal, float timeDashing, float dashSpeedVertical)
     {
+        das = true;
         float tempVel = velMax;
         float tempAcel = acel;
         float vertical = Input.GetAxis("Vertical");
@@ -125,18 +130,13 @@ public class PlayerWalk : MonoBehaviour
         yield return new WaitForSeconds(timeDashing);
         velMax = tempVel;
         acel = tempAcel;
+        das = false;
     }
-    public IEnumerator Trampolim(float dashSpeedHorizontal, float timeDashing, float dashSpeedVertical)
+    public IEnumerator Trampolim(float timeDashing, float forca, Vector3 v)
     {
-        float tempVel = velMax;
-        float tempAcel = acel;
-        velMax = dashSpeedHorizontal;
-        acel = dashSpeedHorizontal;
-        rb.velocity = Vector2.zero;
-        ClampVelocity(velMax);
-        rb.AddForce(Vector2.up * dashSpeedVertical, ForceMode2D.Impulse);
+        das = true;
+        rb.AddForce(v * forca, ForceMode2D.Impulse);
         yield return new WaitForSeconds(timeDashing);
-        velMax = tempVel;
-        acel = tempAcel;
+        das = false;
     }
 }

@@ -6,7 +6,6 @@ public class TeleportPlayer : MonoBehaviour
 {
     public void TeleportarPlayer(Transform checkpoint)
     {
-        Debug.Log("Teleportou");
         transform.position = checkpoint.position;
     }
 }
