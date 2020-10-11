@@ -13,12 +13,14 @@ public class PlayerWalk : MonoBehaviour
     private Rigidbody2D rb;
     private float velAtual;
     private Animator anim;
+    private TrailRenderer tr;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         velAtual = velMax;
+        tr = GetComponent<TrailRenderer>();
     }
     private void Update()
     {
@@ -101,11 +103,13 @@ public class PlayerWalk : MonoBehaviour
     public IEnumerator Dash(float timeDashing, float forca)
     {
         das = true;
+        tr.enabled = true;
         rb.gravityScale = 1;
         rb.velocity = new Vector2(rb.velocity.x, 0);
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
-        if(vertical!=0 && horizontal != 0)
+        CameraShake.Instance.ShakeCamera(5f, 0.4f);
+        if (vertical!=0 && horizontal != 0)
         {
             rb.AddForce(new Vector2(horizontal, vertical).normalized * forca, ForceMode2D.Impulse);
         }
@@ -121,6 +125,7 @@ public class PlayerWalk : MonoBehaviour
                 rb.AddForce(Vector2.left * forca, ForceMode2D.Impulse);
         }
         yield return new WaitForSeconds(timeDashing);
+        tr.enabled = false;
         das = false;
         rb.gravityScale = 3;
     }
@@ -129,6 +134,7 @@ public class PlayerWalk : MonoBehaviour
         das = true;
         rb.gravityScale = 1;
         rb.velocity = Vector3.zero;
+        CameraShake.Instance.ShakeCamera(5f, 0.4f);
         rb.AddForce(v * forca, ForceMode2D.Impulse);
         yield return new WaitForSeconds(timeDashing);
         das = false;
