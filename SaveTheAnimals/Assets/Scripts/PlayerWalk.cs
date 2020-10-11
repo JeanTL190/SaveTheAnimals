@@ -84,7 +84,10 @@ public class PlayerWalk : MonoBehaviour
     {
         velMax = v;
     }
-
+    public float GetVelMax()
+    {
+        return velMax;
+    }
     public IEnumerator Dash(float dashSpeed, float timeDashing)
     {
         float tempVel = velMax;
