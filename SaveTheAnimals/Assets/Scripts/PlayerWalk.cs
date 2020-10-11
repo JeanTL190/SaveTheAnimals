@@ -84,23 +84,44 @@ public class PlayerWalk : MonoBehaviour
     {
         velMax = v;
     }
-
-    public IEnumerator Dash(float dashSpeed, float timeDashing)
+    public float GetVelMax()
+    {
+        return velMax;
+    }
+    public IEnumerator Dash(float dashSpeedHorizontal, float timeDashing, float dashSpeedVertical)
     {
         float tempVel = velMax;
         float tempAcel = acel;
         float vertical = Input.GetAxis("Vertical");
-        velMax = dashSpeed;
-        acel = dashSpeed;
-        if(velAtual == 0)
+        float horizontal = Input.GetAxis("Horizontal");
+        velMax = dashSpeedHorizontal;
+        acel = dashSpeedHorizontal;
+        rb.velocity = Vector2.zero;
+        if(vertical !=0 && horizontal != 0)
+        {
+            if (right)
+                ClampVelocity(velMax);
+            else
+                ClampVelocity(-velMax);
+            if(vertical>0)
+                rb.AddForce(Vector2.up * dashSpeedVertical, ForceMode2D.Impulse);
+            else
+                rb.AddForce(Vector2.down * dashSpeedVertical, ForceMode2D.Impulse);
+        }
+        else if (vertical != 0)
+        {
+            if (vertical > 0)
+                rb.AddForce(Vector2.up * dashSpeedVertical, ForceMode2D.Impulse);
+            else
+                rb.AddForce(Vector2.down * dashSpeedVertical, ForceMode2D.Impulse);
+        }
+        else if (velAtual == 0)
         {
             if(right)
                 ClampVelocity(velMax);
             else
-                ClampVelocity(velMax);
+                ClampVelocity(-velMax);
         }
-        if(vertical!=0)
-            rb.AddForce(Vector2.up * dashSpeed / 5, ForceMode2D.Impulse);
         yield return new WaitForSeconds(timeDashing);
         velMax = tempVel;
         acel = tempAcel;

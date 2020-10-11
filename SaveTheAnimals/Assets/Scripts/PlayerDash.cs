@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerDash : MonoBehaviour
 {
     [SerializeField]
-    private float dashSpeed;
+    private float dashSpeedH;
+    [SerializeField]
+    private float dashSpeedV;
     private float dashTime;
     [SerializeField]
     private float startDashTime;
@@ -26,7 +28,7 @@ public class PlayerDash : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                StartCoroutine(pw.Dash(dashSpeed, timeDashing));
+                StartCoroutine(pw.Dash(dashSpeedH, timeDashing,dashSpeedV));
                 dashTime = startDashTime;
             }
         }
