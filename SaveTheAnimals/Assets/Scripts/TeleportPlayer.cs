@@ -5,7 +5,13 @@ using UnityEngine;
 public class TeleportPlayer : MonoBehaviour
 {
     public CameraFade fade;
+    private PlayerWalk pw;
     [SerializeField] private float timeToFade;
+
+    private void Awake()
+    {
+        pw = GetComponent<PlayerWalk>();
+    }
 
     public void TeleportarPlayer(Transform checkpoint)
     {
@@ -14,12 +20,14 @@ public class TeleportPlayer : MonoBehaviour
 
     IEnumerator Teleport(Transform checkpoint)
     {
+        pw.SetPermitMove(false);
         CameraShake.Instance.ShakeCamera(5f, 0.1f);
         fade.TriggerFade();
         yield return new WaitForSeconds(timeToFade);
         transform.position = checkpoint.position;
         yield return new WaitForSeconds(timeToFade);
         fade.TriggerFade();
+        pw.SetPermitMove(true);
     }
 
 }

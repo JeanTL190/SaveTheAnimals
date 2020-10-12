@@ -15,6 +15,7 @@ public class PlayerWalk : MonoBehaviour
     private Animator anim;
     private TrailRenderer tr;
     private ParticleSystem dust;
+    private bool canMove = true;
 
     private void Awake()
     {
@@ -62,9 +63,13 @@ public class PlayerWalk : MonoBehaviour
     }
     private void ClampVelocity(float vel)
     {
-        float x = Mathf.Clamp(vel, -velMax, velMax);
-        rb.velocity = new Vector2(x, rb.velocity.y);
-        velAtual = x;
+        if (canMove)
+        {
+            float x = Mathf.Clamp(vel, -velMax, velMax);
+            rb.velocity = new Vector2(x, rb.velocity.y);
+            velAtual = x;
+        }
+        
     }
     private void Stoped()
     {
@@ -101,6 +106,10 @@ public class PlayerWalk : MonoBehaviour
     public float GetVelMax()
     {
         return velMax;
+    }
+    public void SetPermitMove(bool permit)
+    {
+        canMove = permit;
     }
     public IEnumerator Dash(float timeDashing, float forca)
     {
