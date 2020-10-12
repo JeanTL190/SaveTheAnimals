@@ -10,6 +10,7 @@ public class Espinhos : MonoBehaviour
     {   
         if( (((1 << collision.gameObject.layer) & platformLayerMask) != 0))
         {
+            collision.gameObject.GetComponent<Sounds>().StartSom(2);
             collision.gameObject.GetComponent<TeleportPlayer>().TeleportarPlayer(checkpoint);
         }
     }
