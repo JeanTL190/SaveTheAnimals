@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Animal
   - Slippery
+  - Block
+  - Enemy
   layers:
   - Default
   - TransparentFX

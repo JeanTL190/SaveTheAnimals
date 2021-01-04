@@ -24,8 +24,8 @@ public class DoubleJump : MonoBehaviour
             jumps = 0;
         }
         PuloDuplo();
-
     }
+
     private void PuloDuplo()
     {
         if (Input.GetButtonDown("Jump") && !pj.IsGrounded() && canDoubleJump)
