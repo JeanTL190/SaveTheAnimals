@@ -17,6 +17,8 @@ public class PlayerWalk : MonoBehaviour
     private ParticleSystem dust;
     private bool canMove = true;
 
+    public bool canWalk = true;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -63,7 +65,7 @@ public class PlayerWalk : MonoBehaviour
     }
     private void ClampVelocity(float vel)
     {
-        if (canMove)
+        if (canMove && canWalk)
         {
             float x = Mathf.Clamp(vel, -velMax, velMax);
             rb.velocity = new Vector2(x, rb.velocity.y);

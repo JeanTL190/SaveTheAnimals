@@ -14,6 +14,8 @@ public class PlayerDash : MonoBehaviour
     private PlayerWalk pw;
     private Rigidbody2D rb;
 
+    public bool canDash = true;
+
     void Start()
     {
         pw = GetComponent<PlayerWalk>();
@@ -24,7 +26,7 @@ public class PlayerDash : MonoBehaviour
     {
         if (dashTime <= 0)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
             {
                 StartCoroutine(pw.Dash(timeDashing,forca));
                 dashTime = startDashTime;

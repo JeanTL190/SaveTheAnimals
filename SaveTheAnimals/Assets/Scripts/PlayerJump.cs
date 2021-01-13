@@ -10,6 +10,8 @@ public class PlayerJump : MonoBehaviour
     private Animator anim;
     [SerializeField] private Animator jump;
 
+    public bool canJump = true;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -29,7 +31,7 @@ public class PlayerJump : MonoBehaviour
     }
     void Pular()
     {
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (Input.GetButtonDown("Jump") && IsGrounded() && canJump)
         {
             jump.SetTrigger("NormalJump");
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);

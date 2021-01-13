@@ -11,15 +11,19 @@ public class PlayerFire : MonoBehaviour
     private Rigidbody2D crosshairBody;
 
     private WeaponController weapon;
+    private EnergyController energy;
     private PlayerWalk playerWalk;
     private Sounds sounds;
 
     private Vector2 mousePosition;
     private float mouseRotation;
 
+    public bool canFire = true;
+
     private void Awake ()
     {
         weapon = GetComponent<WeaponController>();
+        energy = GetComponent<EnergyController>();
         playerWalk = GetComponent<PlayerWalk>();
         sounds = GetComponent<Sounds>();
     }
@@ -66,20 +70,15 @@ public class PlayerFire : MonoBehaviour
         // crosshairBody.MovePosition(mousePosition);
         aimIndicator.transform.rotation = Quaternion.Euler(0f, 0f, mouseRotation);
 
-        /*
         // Handles the firing routine (with energy)
-        if ((energy.GetEnergy() >= 10f) && (Input.GetButtonDown("Fire1")))
+        if (Input.GetButtonDown("Fire1") && canFire)
         {
-            weapon.Fire(mouseRotation);
-            audioManager.PlaySound("EnemySuperBolt");
-            energy.ChangeEnergy(-10f);
-        } */
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Debug.Log(playerWalk.GetRight());
-            sounds.StartSom(3);
-            weapon.Fire(mouseRotation);
+            if (energy.GetEnergy() >= 10f)
+            {
+                sounds.StartSom(3);
+                weapon.Fire(mouseRotation);
+                energy.ChangeEnergy(-10f);
+            }
         }
     }
 }
