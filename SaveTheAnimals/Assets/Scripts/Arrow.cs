@@ -10,17 +10,29 @@ public class Arrow : MonoBehaviour
     [SerializeField]
     private float distanceTravel;
 
-    void Start()
+    private Rigidbody2D body;
+
+    private void Awake ()
     {
-        parent = gameObject.transform.parent.transform;
-        GetComponent<Rigidbody2D>().velocity = new Vector2(arrowSpeed, 0);
+        body = GetComponent<Rigidbody2D>();
     }
-    
-    void Update()
+
+    private void Update()
     {
-        if(Mathf.Abs(Vector2.Distance(parent.position, gameObject.transform.position)) > distanceTravel)
+        Destroy(this.gameObject, 3f);
+    }
+
+    public void FireDirection (Vector2 direction)
+    {
+        body.AddForce(direction, ForceMode2D.Impulse);
+    }
+
+    private void OnTriggerEnter2D (Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            collision.gameObject.GetComponent<Sounds>().StartSom(2);
+            collision.gameObject.GetComponent<TeleportPlayer>().TeleportarPlayer();
         }
     }
 }

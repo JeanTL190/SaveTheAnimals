@@ -40,7 +40,6 @@ public class RechargeController : MonoBehaviour
 
     private void OnTriggerEnter2D (Collider2D collision)
     {
-        Debug.Log("Here!");
         if (collision.CompareTag("Player"))
             rechargeTooltip.SetActive(true);
     }

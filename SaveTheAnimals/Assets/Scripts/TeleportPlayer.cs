@@ -18,6 +18,13 @@ public class TeleportPlayer : MonoBehaviour
         StartCoroutine(Teleport(checkpoint));
     }
 
+    // Se não tiver checkpoint definido, transporta o player pro começo do nível
+    public void TeleportarPlayer()
+    {
+        Transform checkpoint = GameObject.Find("CheckPoint").transform;
+        StartCoroutine(Teleport(checkpoint));
+    }
+
     IEnumerator Teleport(Transform checkpoint)
     {
         pw.SetPermitMove(false);
