@@ -19,7 +19,6 @@ public class EnergyController : MonoBehaviour
 
     private void Update ()
     {
-        Debug.Log("Energy: " + energy);
         barController.sliderValue = energy;
     }
 
