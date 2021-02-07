@@ -34,5 +34,10 @@ public class Arrow : MonoBehaviour
             collision.gameObject.GetComponent<Sounds>().StartSom(2);
             collision.gameObject.GetComponent<TeleportPlayer>().TeleportarPlayer();
         }
+
+        if (collision.CompareTag("Block"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

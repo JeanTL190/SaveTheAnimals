@@ -31,6 +31,7 @@ public class TutorialTooltip : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             tooltipText.text = "";
+            Destroy(this.gameObject);
         }
     }
 

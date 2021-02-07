@@ -7,6 +7,8 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] private float detectionRange = 5f;
 
+    [SerializeField] private float moveDistance = 4f;
+
     [SerializeField] private LayerMask opaqueObjects;
 
     private Rigidbody2D enemyBody;
@@ -41,13 +43,13 @@ public class EnemyController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         Sequence s = DOTween.Sequence();
-        s.Append(enemyBody.DOMoveX(4f, 3f).SetRelative());
+        s.Append(enemyBody.DOMoveX(moveDistance, 3f).SetRelative());
         // s.Append(enemyBody.transform.DOScaleX(-1f, 0f));
         s.AppendCallback(() =>
         {
             FlipCharacter();
         });
-        s.Append(enemyBody.DOMoveX(-4f, 3f).SetRelative());
+        s.Append(enemyBody.DOMoveX(-moveDistance, 3f).SetRelative());
         // s.Append(enemyBody.transform.DOScaleX(1f, 0f));
         s.AppendCallback(() =>
         {

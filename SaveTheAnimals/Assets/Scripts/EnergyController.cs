@@ -19,7 +19,10 @@ public class EnergyController : MonoBehaviour
 
     private void Update ()
     {
-        barController.sliderValue = energy;
+        if (barController.isActiveAndEnabled)
+        {
+            barController.sliderValue = energy;
+        }
     }
 
     public float GetEnergy ()

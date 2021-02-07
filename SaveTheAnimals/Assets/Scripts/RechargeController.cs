@@ -55,7 +55,7 @@ public class RechargeController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 if (energy.GetEnergy() < 100f)
                 {
@@ -78,7 +78,7 @@ public class RechargeController : MonoBehaviour
         while (energy.GetEnergy() < 100f)
         {
             yield return new WaitForSeconds(0.5f);
-            // PlaySound
+            sounds.StartSom(0);
             energy.ChangeEnergy(25f);
         }
         InputStatus(true);

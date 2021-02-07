@@ -4969,6 +4969,7 @@ MonoBehaviour:
   desac: 10
   ipt: Horizontal
   right: 1
+  canWalk: 1
 --- !u!114 &3486412513903255314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4984,6 +4985,7 @@ MonoBehaviour:
   jumpForce: 10
   GroundCheckName: GroundCheck
   jump: {fileID: 3486412514472077256}
+  canJump: 1
 --- !u!114 &3486412513903255313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5027,6 +5029,7 @@ MonoBehaviour:
   forca: 15
   startDashTime: 1
   timeDashing: 0.2
+  canDash: 1
 --- !u!95 &3486412513903255317
 Animator:
   serializedVersion: 3
@@ -5482,7 +5485,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e28276ba84644344180dfd5d61b0d6cd, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
@@ -5582,6 +5585,7 @@ MonoBehaviour:
   cameraObj: {fileID: 0}
   crosshair: {fileID: 0}
   aimIndicator: {fileID: 8695977746409909437}
+  canFire: 1
 --- !u!114 &839410034
 MonoBehaviour:
   m_ObjectHideFlags: 0

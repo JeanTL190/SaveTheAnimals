@@ -18,14 +18,16 @@ public class Turret : MonoBehaviour
     private GameObject player;
 
     private GameObject newArrow;
-    private bool canFire;
+    private bool canFire = false;
+
+    private Sounds sounds;
 
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         timeBetweenArrows = startTime;
-        canFire = false;
+        sounds = GetComponent<Sounds>();
     }
 
     void Update()
@@ -71,8 +73,8 @@ public class Turret : MonoBehaviour
         // newArrow = Instantiate(arrow, arrowShooter.position, Quaternion.identity * Quaternion.Euler(0f, 0f, arrowRotation - 180f));
         newArrow = Instantiate(arrow, arrowShooter.position, Quaternion.identity);
         arrowObj = newArrow.GetComponent<Arrow>();
-        
         arrowObj.FireDirection(Vector3.Normalize(player.transform.position - newArrow.transform.position) * projectileSpeed);
+        sounds.StartSom(0);
         
     }
 }
