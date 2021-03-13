@@ -21,6 +21,7 @@ public class RechargeController : MonoBehaviour
     private SpriteRenderer sprite;
 
     private bool isHealing = false;
+    private bool canHeal = false;
     private float repeatRate = 0.5f;
     private float timer = 0;
 
@@ -41,30 +42,30 @@ public class RechargeController : MonoBehaviour
     private void OnTriggerEnter2D (Collider2D collision)
     {
         if (collision.CompareTag("Player"))
+        {
             rechargeTooltip.SetActive(true);
+            canHeal = true;
+        }
     }
 
     private void OnTriggerExit2D (Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-            rechargeTooltip.SetActive(false);
-    }
-
-
-    private void OnTriggerStay2D (Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                if (energy.GetEnergy() < 100f)
-                {
-                    StartHealing();
-                }
-
-            }
+            rechargeTooltip.SetActive(false);
+            canHeal = false;
         }
     }
+
+
+    // private void OnTriggerStay2D (Collider2D collision)
+    // {
+    //     if ((collision.CompareTag("Player")) && (Input.GetKeyDown(KeyCode.E)) && (energy.GetEnergy() < 100f))
+    //     {
+    //         Debug.Log(this.canHeal);
+    //         StartHealing();
+    //     }
+    // }
 
     private void StartHealing ()
     {
@@ -92,4 +93,12 @@ public class RechargeController : MonoBehaviour
         jumpController.canJump = status;
         fireController.canFire = status;
     }
+
+    private void Update()
+    {
+        if(canHeal && Input.GetKeyDown(KeyCode.E))
+            StartCoroutine(HealEnergy());
+        Debug.Log(this.canHeal);
+    }
 }
+

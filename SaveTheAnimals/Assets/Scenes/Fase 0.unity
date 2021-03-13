@@ -128320,6 +128320,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5643696233695092004, guid: d303a35afeb8292489b0f92c9cceae01, type: 3}
+      propertyPath: MinDistance
+      value: 1.0255585
+      objectReference: {fileID: 0}
     - target: {fileID: 7476740046206402420, guid: d303a35afeb8292489b0f92c9cceae01, type: 3}
       propertyPath: player
       value: 
@@ -128336,6 +128340,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 772bf62d2a819f64390d29679d5ccff5, type: 3}
+    - target: {fileID: 7476740046206402423, guid: d303a35afeb8292489b0f92c9cceae01, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.063883305
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476740046206402423, guid: d303a35afeb8292489b0f92c9cceae01, type: 3}
+      propertyPath: m_Radius
+      value: 0.2627616
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476740046206402423, guid: d303a35afeb8292489b0f92c9cceae01, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.0000009536743
+      objectReference: {fileID: 0}
     - target: {fileID: 7476740046206402425, guid: d303a35afeb8292489b0f92c9cceae01, type: 3}
       propertyPath: m_LocalPosition.x
       value: 238.32

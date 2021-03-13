@@ -13,29 +13,42 @@ public class PlayerDash : MonoBehaviour
     private float timeDashing;
     private PlayerWalk pw;
     private Rigidbody2D rb;
+    private GameObject player;
+    private GameObject objectGroundCheck;
+    private GroundCheck scriptGroundCheck;
 
-    public bool canDash = true;
+    public bool canDash = false;
+
+    void Awake()
+    {
+        objectGroundCheck = GameObject.Find("GroundCheck");
+    }
 
     void Start()
     {
+        
         pw = GetComponent<PlayerWalk>();
         rb = GetComponent<Rigidbody2D>();
+        scriptGroundCheck = objectGroundCheck.GetComponent<GroundCheck>();
     }
 
     void Update()
     {
-        if (dashTime <= 0)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
-            {
-                StartCoroutine(pw.Dash(timeDashing,forca));
-                dashTime = startDashTime;
-            }
-        }
-        else
+        if (dashTime > 0)
         {
             dashTime -= Time.deltaTime;
         }
-    }
+        else if (scriptGroundCheck.isGrounded)
+        {
+            canDash = true;
+        }
+        
 
+        if (Input.GetKeyDown(KeyCode.LeftShift)  && canDash )
+        {
+            StartCoroutine(pw.Dash(timeDashing,forca));
+            dashTime = startDashTime;
+            canDash = false;
+        }
+    }
 }
