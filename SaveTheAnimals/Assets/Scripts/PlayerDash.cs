@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerDash : MonoBehaviour
 {
     [SerializeField]
-    private float forca;
+    private float forca = 15f;
     private float dashTime;
     [SerializeField]
-    private float startDashTime;
+    private float startDashTime = 0.6f;
     [SerializeField]
-    private float timeDashing;
+    private float timeDashing = 0.2f;
     private PlayerWalk pw;
     private Rigidbody2D rb;
     private GameObject player;

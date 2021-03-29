@@ -129965,6 +129965,10 @@ PrefabInstance:
       propertyPath: fade
       value: 
       objectReference: {fileID: 759394067}
+    - target: {fileID: 3486412513903255316, guid: 4bb9968877afcf940b75cdad254115e2, type: 3}
+      propertyPath: startDashTime
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 3486412513903255323, guid: 4bb9968877afcf940b75cdad254115e2, type: 3}
       propertyPath: m_Name
       value: Player

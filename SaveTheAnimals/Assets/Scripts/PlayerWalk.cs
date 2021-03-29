@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerWalk : MonoBehaviour
 {
-    [SerializeField] private float velMax = 1f;
-    [SerializeField] private float acel = 1f;
-    [SerializeField] private float desac = 1f;
+    [SerializeField] private float velMax = 10f;
+    [SerializeField] private float acel = 10f;
+    [SerializeField] private float desac = 10f;
     [SerializeField] private string ipt;
-    [SerializeField] private bool right = true;
+    private bool right = true;
     private bool das = false;
     private Rigidbody2D rb;
-    private float velAtual;
+    [SerializeField]private float velAtual;
     private Animator anim;
     private TrailRenderer tr;
     private ParticleSystem dust;
@@ -23,7 +23,7 @@ public class PlayerWalk : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        velAtual = velMax;
+        velAtual = 0;
         tr = GetComponent<TrailRenderer>();
         dust = GetComponentInChildren<ParticleSystem>();
     }
@@ -39,20 +39,23 @@ public class PlayerWalk : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        float aux = Input.GetAxis(ipt);
+        //float aux = Input.GetAxis(ipt);
+        float auxraw = Input.GetAxisRaw(ipt);
         if (!das)
         {
-            if (aux > 0)
+            if (auxraw > 0)
             {
                 transform.rotation = new Quaternion(0, 0, 0, 0);
-                velAtual += (aux * acel);
+
+                velAtual = acel * auxraw;
                 ClampVelocity(velAtual);
                 right = true;
             }
-            else if (aux < 0)
+            else if (auxraw < 0)
             {
                 transform.rotation = new Quaternion(0, 180, 0, 0);
-                velAtual += (aux * acel);
+                velAtual = acel * auxraw;
+
                 ClampVelocity(velAtual);
                 right = false;
             }
@@ -82,7 +85,7 @@ public class PlayerWalk : MonoBehaviour
                 velAtual -= desac;
                 velAtual = Mathf.Clamp(velAtual, 0, velMax);
             }
-            else if (velAtual < 0)
+            else if(velAtual < 0)
             {
                 velAtual += desac;
                 velAtual = Mathf.Clamp(velAtual, -velMax, 0);

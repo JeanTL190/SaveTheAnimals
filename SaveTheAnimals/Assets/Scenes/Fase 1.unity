@@ -12131,6 +12131,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3486412513903255312, guid: 4bb9968877afcf940b75cdad254115e2, type: 3}
+      propertyPath: acel
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3486412513903255312, guid: 4bb9968877afcf940b75cdad254115e2, type: 3}
+      propertyPath: desac
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3486412513903255312, guid: 4bb9968877afcf940b75cdad254115e2, type: 3}
+      propertyPath: right
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3486412513903255315, guid: 4bb9968877afcf940b75cdad254115e2, type: 3}
       propertyPath: fade
       value: 
@@ -12202,11 +12214,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8455019887577958369, guid: 9a41c09a622557e469dfc537ebfd08bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 31.999977
+      value: 31.734245
       objectReference: {fileID: 0}
     - target: {fileID: 8455019887577958369, guid: 9a41c09a622557e469dfc537ebfd08bb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.513556
+      value: 12.51408
       objectReference: {fileID: 0}
     - target: {fileID: 8455019887577958369, guid: 9a41c09a622557e469dfc537ebfd08bb, type: 3}
       propertyPath: m_LocalPosition.z
