@@ -6,6 +6,7 @@ public class RechargeController : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject rechargeTooltip;
+    [SerializeField] private GameObject checkpoint;
 
     private EnergyController energy;
 
@@ -15,6 +16,9 @@ public class RechargeController : MonoBehaviour
     private PlayerFire fireController;
 
     private Rigidbody2D playerBody;
+
+    [SerializeField] private Transform checkpointTransform;
+    [SerializeField] private Transform thisTransform;
 
     private Sounds sounds;
 
@@ -33,6 +37,8 @@ public class RechargeController : MonoBehaviour
         jumpController = player.GetComponent<PlayerJump>();
         fireController = player.GetComponent<PlayerFire>();
 
+        thisTransform = gameObject.GetComponent<Transform>();
+
         energy = player.GetComponent<EnergyController>();
         playerBody = player.GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
@@ -45,6 +51,7 @@ public class RechargeController : MonoBehaviour
         {
             rechargeTooltip.SetActive(true);
             canHeal = true;
+            checkpointTransform.position = thisTransform.position;
         }
     }
 
