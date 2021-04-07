@@ -51,4 +51,9 @@ public class PlayerDash : MonoBehaviour
             canDash = false;
         }
     }
+
+    bool GetDash()
+    {
+        return canDash;
+    }
 }
