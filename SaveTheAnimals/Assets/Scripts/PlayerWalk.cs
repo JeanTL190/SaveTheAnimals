@@ -116,7 +116,7 @@ public class PlayerWalk : MonoBehaviour
     {
         canMove = permit;
     }
-    public IEnumerator Dash(float timeDashing, float forca)
+    public IEnumerator Dash(float timeDashing, Vector2 direction)
     {
         das = true;
         tr.enabled = true;
@@ -125,21 +125,24 @@ public class PlayerWalk : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
         CameraShake.Instance.ShakeCamera(5f, 0.4f);
+        rb.AddForce(direction, ForceMode2D.Impulse);
+        Debug.Log("Value: " + direction);
+        /*
         if (vertical!=0 && horizontal != 0)
         {
-            rb.AddForce(new Vector2(horizontal, vertical).normalized * forca, ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(horizontal, vertical).normalized * force, ForceMode2D.Impulse);
         }
         else if (vertical != 0)
         {
-            rb.AddForce(new Vector2(0, vertical).normalized * forca, ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(0, vertical).normalized * force, ForceMode2D.Impulse);
         }
         else
         {
             if(right)
-                rb.AddForce(Vector2.right * forca, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.right * force, ForceMode2D.Impulse);
             else
-                rb.AddForce(Vector2.left * forca, ForceMode2D.Impulse);
-        }
+                rb.AddForce(Vector2.left * force, ForceMode2D.Impulse);
+        } */
         yield return new WaitForSeconds(timeDashing);
         tr.enabled = false;
         das = false;
