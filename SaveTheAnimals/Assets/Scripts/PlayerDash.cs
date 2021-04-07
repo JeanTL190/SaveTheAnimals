@@ -5,8 +5,11 @@ using UnityEngine;
 public class PlayerDash : MonoBehaviour
 {
     [SerializeField]
-    private float forca = 15f;
+    private float dashForce;
+    private Vector2 dashDir;
     private float dashTime;
+    [SerializeField]
+    private float verticalDampening;
     [SerializeField]
     private float startDashTime = 0.6f;
     [SerializeField]
@@ -22,6 +25,7 @@ public class PlayerDash : MonoBehaviour
     void Awake()
     {
         objectGroundCheck = GameObject.Find("GroundCheck");
+        player = this.gameObject;
     }
 
     void Start()
@@ -42,11 +46,14 @@ public class PlayerDash : MonoBehaviour
         {
             canDash = true;
         }
-        
 
-        if (Input.GetKeyDown(KeyCode.LeftShift)  && canDash )
+        if (Input.GetKeyDown(KeyCode.Mouse1) && canDash)
         {
-            StartCoroutine(pw.Dash(timeDashing,forca));
+            dashDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - player.transform.position;
+            dashDir.Normalize();
+            dashDir *= dashForce;
+            dashDir.y *= verticalDampening;
+            StartCoroutine(pw.Dash(timeDashing, dashDir));
             dashTime = startDashTime;
             canDash = false;
         }
