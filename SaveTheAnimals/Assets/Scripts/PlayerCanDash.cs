@@ -1,18 +1,33 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCanDash : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private Color newColor;
+    [SerializeField] private PlayerDash playerdash;
+
+    void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
+        playerdash = GetComponent<PlayerDash>();
+    }
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if(playerdash.canDash)
+        {
+            sr.color = Color.white;
+        }
+        else
+        {
+            sr.color = new Color(255, 0, 255, 100);
+        }
     }
 }

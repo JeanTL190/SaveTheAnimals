@@ -130981,6 +130981,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.52682877, y: 1.3226774}
   m_EdgeRadius: 0
+--- !u!114 &1909233572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909233551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 735f2599b743a6b4a9178782dcc6d3c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sr: {fileID: 0}
+  newColor: {r: 0, g: 0, b: 0, a: 0}
+  playerdash: {fileID: 0}
 --- !u!1001 &1926660475
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132926,7 +132941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3486412513903255316, guid: 4bb9968877afcf940b75cdad254115e2, type: 3}
       propertyPath: verticalDampening
-      value: 0.75
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 3486412513903255316, guid: 4bb9968877afcf940b75cdad254115e2, type: 3}
       propertyPath: crosshair
