@@ -64,16 +64,6 @@ public class RechargeController : MonoBehaviour
         }
     }
 
-
-    // private void OnTriggerStay2D (Collider2D collision)
-    // {
-    //     if ((collision.CompareTag("Player")) && (Input.GetKeyDown(KeyCode.E)) && (energy.GetEnergy() < 100f))
-    //     {
-    //         Debug.Log(this.canHeal);
-    //         StartHealing();
-    //     }
-    // }
-
     private void StartHealing ()
     {
         StartCoroutine(HealEnergy());
@@ -85,9 +75,9 @@ public class RechargeController : MonoBehaviour
         playerBody.velocity = Vector2.zero;
         while (energy.GetEnergy() < 100f)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.01f);
             sounds.StartSom(0);
-            energy.ChangeEnergy(25f);
+            energy.ChangeEnergy(1f);
         }
         InputStatus(true);
     }
