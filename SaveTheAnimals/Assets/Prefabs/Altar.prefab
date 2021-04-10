@@ -117,6 +117,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3486412513903255323, guid: 4bb9968877afcf940b75cdad254115e2, type: 3}
   rechargeTooltip: {fileID: 0}
+  checkpoint: {fileID: 0}
+  checkpointTransform: {fileID: 0}
+  thisTransform: {fileID: 0}
 --- !u!95 &8370287443947344446
 Animator:
   serializedVersion: 3
@@ -145,7 +148,7 @@ AudioSource:
   m_GameObject: {fileID: 7476740046206402421}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 308944651369758509, guid: d63c18c121104c44b8e7053c185b2513, type: 2}
   m_audioClip: {fileID: 8300000, guid: cd2619c4334f98044bbc5d3f3252df14, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
